@@ -21,10 +21,45 @@
             </h1>
         </div>
         <div class="navbaraction">
-            <button id="love">💖 我的收藏</button>
-            <button id="dark">🌓 主题切换</button>
+            <button class="btn" id="love">💖 我的收藏</button>
+            <button class="btn" id="dark">🌓 主题切换</button>
         </div>
     </header>
+
+    <!-- 轮播图 -->
+    <!-- section是有主题的区块 -->
+    <!-- 先用三个slide占位，后续js补上 -->
+    <!-- carousel是轮播图区域最外层容器，all-slides是轨道，slide是占位的静态页面 
+     用img不用bg是在html时就可以加载出来  caption是文字说明-->
+    <section class="carousel">
+        <div class="all-slides">
+            <div class="slide1 slide">
+                <img src="image/1.jpeg" alt="">
+                <div class="caption">孤独摇滚</div>
+            </div>
+            <div class="slide2 slide">
+                <div class="slide1 slide">
+                    <img src="image/1.jpeg" alt="">
+                    <div class="caption">孤独摇滚</div>
+                </div>
+            </div>
+            <div class="slide3 slide">
+                <div class="slide1 slide">
+                    <img src="image/1.jpeg" alt="">
+                    <div class="caption">孤独摇滚</div>
+                </div>
+            </div>
+        </div>
+
+        <button class="carousel-btn prev">&#10094;</button>
+        <button class="carousel-btn next">&#10095;</button>
+
+        <div class="dots">
+            <div class="dot1"></div>
+            <div class="dot2"></div>
+            <div class="dot3"></div>
+        </div>
+    </section>
 </body>
 
 </html>

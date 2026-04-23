@@ -1,14 +1,50 @@
-.navbar {
-    display: flex;
+body {
+    background-color: rgb(233, 251, 255);
 }
 
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    height: 100px;
+    background-color: rgb(233, 251, 255);
+    border-bottom: 1px solid rgb(143, 179, 236);
+}
 
+.navbaraction {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
 
+.btn {
+    height: 40px;
+    color: rgb(120, 47, 25);
+    font-weight: 700;
+    padding: 10px;
+    margin: 20px;
+    background-color: rgb(195, 201, 249);
+    border: solid 2px rgb(185, 219, 249);
+    border-radius: 20px;
+    transition: 0.2s;
+
+    /* 表示可以点击 */
+    cursor: pointer;
+}
+
+.btn:hover {
+    border-color: rgb(215, 193, 240);
+    transform: translateY(-3px);
+}
+
+.btn:active {
+    background-color: rgb(219, 173, 246);
+}
 
 
 .logo {
     width: 402px;
     height: 100px;
+    margin-left: 20px;
 }
 
 .logo h1 {
@@ -23,4 +59,51 @@
     text-indent: -999px;
     overflow: hidden;
     background: url(image/logo.png) center/cover;
+}
+
+.carousel {
+    background-color: rgb(233, 251, 255);
+    width: 100%;
+    max-width: 1200px;
+    height: 500px;
+    margin: 20px auto;
+    overflow: hidden;
+    border-radius: 12px;
+}
+
+.all-slides {
+    display: flex;
+    height: 100%;
+
+}
+
+.slide {
+    /* 加上这一行可以不用给allslides设置width: 300%;   意思是禁止缩小，默认值是1允许缩小*/
+    flex-shrink: 0;
+
+    position: relative;
+    height: 100%;
+    width: 100%;
+}
+
+.carousel .all-slides img {
+    width: 100%;
+    height: 100%;
+
+    /* img用object-fit实现覆盖 */
+    object-fit: cover;
+    object-position: 50% 0%;
+}
+
+.slide .caption {
+    position: absolute;
+    background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
+    height: 70px;
+    width: 100%;
+    bottom: 0%;
+    line-height: 70px;
+    font-weight: 700;
+    font-size: 1.5rem;
+    color: aliceblue;
+    text-align: center;
 }
