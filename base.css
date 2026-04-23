@@ -1,0 +1,16 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+    /* 表示继承父代文字颜色，链接标签默认是蓝色 */
+}
+
+ul {
+    list-style: none;
+    /* 去掉圆点 */
+}
