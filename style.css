@@ -10,6 +10,19 @@
     --bg-modal: rgb(221, 198, 246);
 }
 
+/* 黑夜模式*/
+body.dark {
+    --bg-primary: #1e272e;
+    --border-color: #4b6584;
+    --text-btn: #d2dae2;
+    --bg-btn: #2d3436;
+    --border-btn: #4b6584;
+    --border-btn-hover: #6a89cc;
+    --bg-btn-active: #6a89cc;
+    --focus-color: #6a89cc;
+    --bg-modal: #2d3436;
+}
+
 body {
     background-color: var(--bg-primary);
 }
@@ -179,6 +192,8 @@ body {
 }
 
 .container {
+    color: rgb(160, 86, 230);
+
     display: flex;
     width: 100%;
     max-width: 1200px;
