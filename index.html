@@ -37,17 +37,13 @@
                 <img src="image/1.jpeg" alt="">
                 <div class="caption">孤独摇滚</div>
             </div>
-            <div class="slide2 slide">
-                <div class="slide1 slide">
-                    <img src="image/1.jpeg" alt="">
-                    <div class="caption">孤独摇滚</div>
-                </div>
+            <div class="slide1 slide">
+                <img src="image/1.jpeg" alt="">
+                <div class="caption">孤独摇滚</div>
             </div>
-            <div class="slide3 slide">
-                <div class="slide1 slide">
-                    <img src="image/1.jpeg" alt="">
-                    <div class="caption">孤独摇滚</div>
-                </div>
+            <div class="slide1 slide">
+                <img src="image/1.jpeg" alt="">
+                <div class="caption">孤独摇滚</div>
             </div>
         </div>
 
@@ -60,6 +56,90 @@
             <div class="dot dot3"></div>
         </div>
     </section>
+
+
+
+    <div class="container">
+        <!-- 侧边栏 -->
+        <div class="controls">
+            <aside class="search control">
+                <label for="search">搜索动漫</label>
+                <input type="search" id="search" placeholder="请输入关键字...">
+            </aside>
+
+            <aside class="select control">
+                <label for="sort">推荐</label>
+                <select id="sort">
+                    <option value="default" selected>默认推荐</option>
+                    <option value="score-sort">评分从高到低</option>
+                </select>
+            </aside>
+        </div>
+
+        <!-- 主题内容 -->
+        <main>
+            <div class="content">
+                <h2>搜索结果</h2>
+            </div>
+
+            <div class="cards">
+                <div class="card">
+                    <img src="image/card1.jpeg" alt="">
+                    <div class="card-content">
+                        <h3>样例</h3>
+                    </div>
+                </div>
+                <div class="card">
+                    <img src="image/card1.jpeg" alt="">
+                    <div class="card-content">
+                        <h3>样例</h3>
+                    </div>
+                </div>
+                <div class="card">
+                    <img src="image/card1.jpeg" alt="">
+                    <div class="card-content">
+                        <h3>样例</h3>
+                    </div>
+                </div>
+                <div class="card">
+                    <img src="image/card1.jpeg" alt="">
+                    <div class="card-content">
+                        <h3>样例</h3>
+                    </div>
+                </div>
+                <div class="card">
+                    <img src="image/card1.jpeg" alt="">
+                    <div class="card-content">
+                        <h3>样例</h3>
+                    </div>
+                </div>
+                <div class="card">
+                    <img src="image/card1.jpeg" alt="">
+                    <div class="card-content">
+                        <h3>样例</h3>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+
+    </div>
+
+    <!-- 详情页弹窗 -->
+    <div class="modal">
+        <div class="modal-content">
+            <button class="close-btn" id="close-modal">&times;</button>
+            <div id="modal-body">
+                <h2>动漫标题</h2>
+                <p><strong>开播:</strong> 2026-04</p>
+                <p><strong>原名:</strong> Example</p>
+                <hr>
+                <p>动漫简介……</p>
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
 </body>
 
 </html>

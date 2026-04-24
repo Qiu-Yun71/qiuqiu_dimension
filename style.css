@@ -165,3 +165,142 @@ body {
     background: rgb(143, 179, 236);
     transform: scale(1.3);
 }
+
+.container {
+    display: flex;
+    width: 100%;
+    max-width: 1200px;
+    margin: 20px auto;
+    gap: 20px;
+
+    font-size: 1rem;
+    font-weight: 700;
+
+}
+
+.container .controls {
+    /* 多行伸缩布局  控制侧边栏为固定的250px */
+    flex: 0 0 250px;
+}
+
+.container .control {
+    margin-bottom: 10px;
+}
+
+.container .control label {
+    display: block;
+    margin-bottom: 10px;
+}
+
+.container .control input,
+.container .control select {
+    width: 100%;
+    padding: 10px;
+    border: solid rgb(233, 251, 255) 2px;
+
+    border-radius: 6px;
+
+    /* 移除表单点击后自带的轮廓线 */
+    outline: none;
+}
+
+.container .control input:focus,
+.container .control select:focus {
+    border-color: rgb(136, 169, 224);
+}
+
+
+
+.cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 20px;
+
+}
+
+.card {
+    position: relative;
+    border-radius: 5%;
+    overflow: hidden;
+    transition: 0.3s;
+}
+
+.card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: 0.3s;
+}
+
+.card-content {
+    position: absolute;
+    bottom: 0%;
+    width: 100%;
+    height: 20%;
+    background-color: rgb(143, 179, 236);
+    text-align: center;
+    color: aliceblue;
+    font-size: 1.5rem;
+    font-weight: 700;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.card:hover img {
+    /* 缩放 */
+    transform: scale(1.05);
+
+}
+
+
+/* model是整个页面 model-content 是出现的文本框 */
+.modal {
+    /* 后面用js调出 */
+    display: none;
+
+    background-color: rgba(0, 0, 0, 0.6);
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    position: fixed;
+
+    /* inset相当于四个方向都设置零 即全屏覆盖 */
+    inset: 0;
+    z-index: 1000;
+
+}
+
+.modal-content {
+    width: 90%;
+    max-width: 500px;
+    max-height: 80vh;
+    padding: 30px;
+    border-radius: 12px;
+    background-color: rgb(221, 198, 246);
+    border: solid 2px rgb(136, 169, 224);
+
+    /* y轴向溢出时自动显示滚动条 */
+    overflow-y: auto;
+
+    position: relative;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+.close-btn {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 28px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.close-btn:hover {
+    color: rgb(136, 169, 224);
+}
