@@ -1,13 +1,25 @@
+:root {
+    --bg-primary: rgb(233, 251, 255);
+    --border-color: rgb(143, 179, 236);
+    --text-btn: rgb(120, 47, 25);
+    --bg-btn: rgb(195, 201, 249);
+    --border-btn: rgb(185, 219, 249);
+    --border-btn-hover: rgb(212, 190, 236);
+    --bg-btn-active: rgb(219, 173, 246);
+    --focus-color: rgb(136, 169, 224);
+    --bg-modal: rgb(221, 198, 246);
+}
+
 body {
-    background-color: rgb(233, 251, 255);
+    background-color: var(--bg-primary);
 }
 
 .navbar {
     display: flex;
     justify-content: space-between;
     height: 100px;
-    background-color: rgb(233, 251, 255);
-    border-bottom: 1px solid rgb(143, 179, 236);
+    background-color: var(--bg-primary);
+    border-bottom: 1px solid var(--border-color);
 }
 
 .navbaraction {
@@ -18,12 +30,12 @@ body {
 
 .btn {
     height: 40px;
-    color: rgb(120, 47, 25);
+    color: var(--text-btn);
     font-weight: 700;
     padding: 10px;
     margin: 20px;
-    background-color: rgb(195, 201, 249);
-    border: solid 2px rgb(185, 219, 249);
+    background-color: var(--bg-btn);
+    border: solid 2px var(--border-btn);
     border-radius: 20px;
     transition: 0.2s;
 
@@ -32,12 +44,12 @@ body {
 }
 
 .btn:hover {
-    border-color: rgb(212, 190, 236);
+    border-color: var(--border-btn-hover);
     transform: translateY(-3px);
 }
 
 .btn:active {
-    background-color: rgb(219, 173, 246);
+    background-color: var(--bg-btn-active);
 }
 
 
@@ -63,7 +75,7 @@ body {
 
 .carousel {
     position: relative;
-    background-color: rgb(233, 251, 255);
+    background-color: var(--bg-primary);
     width: 100%;
     max-width: 1200px;
     height: 500px;
@@ -114,7 +126,7 @@ body {
     bottom: 50%;
     transform: translateY(50%);
     background-color: rgba(0, 0, 0, 0.3);
-    color: rgb(143, 179, 236);
+    color: var(--border-color);
     cursor: pointer;
     font-size: 1.5rem;
     padding: 15px 20px;
@@ -153,7 +165,7 @@ body {
 .dot {
     width: 12px;
     height: 12px;
-    background: rgb(185, 219, 249);
+    background: var(--border-btn);
     border-radius: 50%;
     cursor: pointer;
     transition: 0.3s;
@@ -162,7 +174,7 @@ body {
 
 /* :active 是 瞬时的,不能实现点击后一直高亮，所以js一般是用.active加上一个额外的类名实现效果 css是用的单选框绑定的圆点checked实现的*/
 .dot:active {
-    background: rgb(143, 179, 236);
+    background: var(--border-color);
     transform: scale(1.3);
 }
 
@@ -196,7 +208,7 @@ body {
 .container .control select {
     width: 100%;
     padding: 10px;
-    border: solid rgb(233, 251, 255) 2px;
+    border: solid var(--bg-primary) 2px;
 
     border-radius: 6px;
 
@@ -206,7 +218,7 @@ body {
 
 .container .control input:focus,
 .container .control select:focus {
-    border-color: rgb(136, 169, 224);
+    border-color: var(--focus-color);
 }
 
 
@@ -237,7 +249,7 @@ body {
     bottom: 0%;
     width: 100%;
     height: 20%;
-    background-color: rgb(143, 179, 236);
+    background-color: var(--border-color);
     text-align: center;
     color: aliceblue;
     font-size: 1.5rem;
@@ -280,8 +292,8 @@ body {
     max-height: 80vh;
     padding: 30px;
     border-radius: 12px;
-    background-color: rgb(221, 198, 246);
-    border: solid 2px rgb(136, 169, 224);
+    background-color: var(--bg-modal);
+    border: solid 2px var(--focus-color);
 
     /* y轴向溢出时自动显示滚动条 */
     overflow-y: auto;
@@ -302,5 +314,5 @@ body {
 }
 
 .close-btn:hover {
-    color: rgb(136, 169, 224);
+    color: var(--focus-color);
 }
