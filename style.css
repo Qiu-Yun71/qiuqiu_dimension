@@ -86,6 +86,14 @@ body {
     background: url(image/logo.png) center/cover;
 }
 
+
+/* 黑夜模式logo图片替换 */
+body.dark .logo a {
+    background: url(image/logo_dark.png) center/cover;
+}
+
+
+
 .carousel {
     position: relative;
     background-color: var(--bg-primary);
