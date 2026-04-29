@@ -10,7 +10,7 @@ if (nowtheme === 'dark') {
 themechange.addEventListener('click', () => {
     document.body.classList.toggle('dark');
     const current = document.body.classList.contains('dark') ? 'dark' : 'light'
-    localStorage.setItem('theme', 'current')
+    localStorage.setItem('theme', current)
 
 })
 
@@ -19,9 +19,9 @@ themechange.addEventListener('click', () => {
 const cardContainer = document.querySelector('.cards')
 
 //加一个显示加载中的元素
-const loading = doucment.createElement('div')
+const loading = document.createElement('div')
 loading.className = 'loading'  //设置类名便于添加css样式
-loading.textContent = '<strong>加载中......</strong>'
+loading.textContent = '加载中......'
 
 async function fetchAnime() {
     cardContainer.innerHTML = '';//清空原有内容
@@ -43,7 +43,7 @@ async function fetchAnime() {
         });
 
         //排除掉没有封面的动漫信息，取前二十条
-        const animeList = allItems.filter(item => item => item.images && item.images.large).slice(0, 20)
+        const animeList = allItems.filter(item => item.images && item.images.large).slice(0, 20)
         if (animeList.length === 0) {
             cardContainer.innerHTML = '<p>暂无内容</p>'
             return
@@ -54,15 +54,36 @@ async function fetchAnime() {
 
     } catch (error) {
         console.error('获取失败', error)
-        cardsContainer.innerHTML = '<p>数据加载失败，请检查网络后刷新重试。</p>'
+        cardContainer.innerHTML = '<p>数据加载失败，请检查网络后刷新重试。</p>'
     }
 
 
 }
+//动漫标题名字个数改变字体显示大小
+function getFontSize(title) {
+    const length = title.length;
+    if (length <= 4) return '1.8rem';
+    if (length <= 8) return '1.4rem';
+    if (length <= 12) return '1.3rem';
+    return '1.2rem';
+}
 
-//渲染函数定义
 function renderCards(animeList) {
+    const html = animeList.map(anime => {
+        const picture = anime.images.large
+        const title = anime.name_cn || anime.name
+        const fontSize = getFontSize(title);
 
+        return `<div class="card">
+            <img src="${picture}" alt="${title}">
+            <div class="card-content">
+                <h3 style="font-size: ${fontSize};">${title}</h3>
+            </div>
+         </div>`
+
+    }).join('')
+
+    cardContainer.innerHTML = html;
 }
 
 fetchAnime()

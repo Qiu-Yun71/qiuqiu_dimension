@@ -258,6 +258,10 @@ body.dark .logo a {
     border-radius: 5%;
     overflow: hidden;
     transition: 0.3s;
+
+    /* 原来只控制了列宽，没设置高度，所以高度随图片大小来，因此出现和模板样式不一样的情况 */
+    /* 该行控制宽高比为3比4 */
+    aspect-ratio: 3 / 4;
 }
 
 .card img {
@@ -268,14 +272,18 @@ body.dark .logo a {
 }
 
 .card-content {
+    display: flex;
     position: absolute;
     bottom: 0%;
     width: 100%;
-    height: 20%;
+    height: 28%;
     background-color: var(--border-color);
     text-align: center;
+    /* block用行高没法垂直居中 改为flex盒模型 */
+    justify-content: center;
+    align-items: center;
     color: aliceblue;
-    font-size: 1.5rem;
+    font-size: 1.2rem;
     font-weight: 700;
 }
 
