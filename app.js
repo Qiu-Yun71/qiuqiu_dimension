@@ -88,4 +88,28 @@ function renderCards(animeList) {
 
 fetchAnime()
 
+//三·搜索功能（防抖）
+const searchInput = document.getElementById('search')
+
+//防抖
+let currenttime
+searchInput.addEventListener('input', (e) => {
+    const keyword = e.target.value.trim();
+    if (currenttime) {
+        clearTimeout(currenttime)
+    }
+    currenttime = setTimeout(() => {
+        if (keyword === '') {
+            fetchAnime()
+        } else {
+            searchAnime(keyword)
+        }
+
+    }, 1000)
+})
+
+
+
+
+
 
