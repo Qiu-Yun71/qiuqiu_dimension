@@ -105,8 +105,31 @@ searchInput.addEventListener('input', (e) => {
             searchAnime(keyword)
         }
 
-    }, 1000)
+    }, 500)
 })
+
+async function searchAnime(keyword) {
+    cardContainer.innerHTML = '';
+    cardContainer.appendChild(loading);
+    try {
+        //这里要用反引号，因为是模板字符串
+        const response = await fetch(`https://api.bgm.tv/search/subject/${keyword}?type=2`)
+        if (!response.ok) throw new Error('搜索失败')
+        const data = await response.json()
+        let searchList = data.list || []
+        searchList = searchList.filter(item => item.images && item.images.large).slice(0, 20)
+        if (searchList.length === 0) {
+            cardContainer.innerHTML = '<p>没有找到相关动漫，试试其他关键词吧～</p>';
+            return;
+        }
+        renderCards(searchList)
+
+    } catch (error) {
+        console.error('搜索出错', error);
+        cardContainer.innerHTML = '<p>搜索失败，请检查网络后重试。</p>';
+
+    }
+}
 
 
 
