@@ -23,6 +23,9 @@ const loading = document.createElement('div')
 loading.className = 'loading'  //设置类名便于添加css样式
 loading.textContent = '加载中......'
 
+let currentList = []//用于排序时存储下原顺序的动漫列表
+
+
 async function fetchAnime() {
     cardContainer.innerHTML = '';//清空原有内容
     cardContainer.appendChild(loading)//显示加载中
@@ -50,6 +53,7 @@ async function fetchAnime() {
         }
 
         //进行渲染
+        currentList = animeList
         renderCards(animeList);
 
     } catch (error) {
@@ -123,6 +127,7 @@ async function searchAnime(keyword) {
             cardContainer.innerHTML = '<p>没有找到相关动漫，试试其他关键词吧～</p>';
             return;
         }
+        currentList = searchList
         renderCards(searchList)
 
     } catch (error) {
@@ -184,6 +189,25 @@ cardContainer.addEventListener('click', (e) => {
 closeModalBtn.addEventListener('click', closeModal)
 modal.addEventListener('click', (e) => {
     if (e.target === modal) closeModal();
+})
+
+
+//五、排序
+const sortSelect = document.getElementById('sort')
+
+sortSelect.addEventListener('change', (e) => {
+    const value = e.target.value
+    if (!currentList.length) return
+
+    let sorted = [...currentList]//不修改原数组，进行浅拷贝(直接相等是指向同一个数组) 之前currentList是直接赋值，指向的是当时的同一个数组
+    if (value === 'score-sort') {
+        //这里问号是判断score不存在的话是undefined，和0取或为0
+        sorted.sort((a, b) => (b.rating?.score || 0) - (a.rating?.score || 0))
+        renderCards(sorted)
+    } else if (value === 'default') {
+        renderCards(currentList);
+        return;
+    }
 })
 
 
