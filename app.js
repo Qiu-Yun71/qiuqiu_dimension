@@ -74,7 +74,8 @@ function renderCards(animeList) {
         const title = anime.name_cn || anime.name
         const fontSize = getFontSize(title);
 
-        return `<div class="card">
+        //用自定义的data-id相较于id没有唯一性限制，用dataset读取
+        return `<div class="card" data-id="${anime.id}">
             <img src="${picture}" alt="${title}">
             <div class="card-content">
                 <h3 style="font-size: ${fontSize};">${title}</h3>
@@ -131,7 +132,59 @@ async function searchAnime(keyword) {
     }
 }
 
+//四、详情页
+const modal = document.querySelector('.modal');
+const modalBody = document.getElementById('modal-body');
+const closeModalBtn = document.getElementById('close-modal');
 
+async function openModal(animeId) {
+    modal.style.display = 'flex'
+    modalBody.innerHTML = '<div style="text-align: center">加载详情中.....</div>'
+    try {
+        const response = await fetch(`https://api.bgm.tv/v0/subjects/${animeId}`)
+        if (!response.ok) {
+            throw new Error('详情加载失败')
+        }
+        const data = await response.json()
+        const title = data.name_cn || data.name;
+        const originalName = data.name;
+        const date = data.date || '未知';
+        const summary = data.summary || '暂无简介';
+
+        modalBody.innerHTML = `
+            <h2>${title}</h2>
+            <p><strong>原名：</strong> ${originalName}</p>
+            <p><strong>开播日期：</strong> ${date}</p>
+            <hr style="margin: 15px 0;">
+            <p><strong>简介：</strong><br>${summary.replace(/\r\n\r\n/g, '<br>')}</p>
+        `
+        //注意浏览器不会识别\n，要替换成br
+
+    } catch (error) {
+        console.error('获取详情失败', error)
+        modalBody.innerHTML = '<p style="color: red;">加载失败，请稍后重试</p>'
+    }
+
+}
+
+function closeModal() {
+    modal.style.display = 'none'//要有引号
+}
+
+cardContainer.addEventListener('click', (e) => {
+    const card = e.target.closest('.card')
+    if (!card) return
+
+    //card.dataset.animeId是字符串，要转换成数字
+    const animeId = parseInt(card.dataset.id)
+    if (animeId) openModal(animeId);
+})
+
+//注意监听器的函数没有括号，不然就是在绑定时直接执行监听器里的函数，而不是点击时执行
+closeModalBtn.addEventListener('click', closeModal)
+modal.addEventListener('click', (e) => {
+    if (e.target === modal) closeModal();
+})
 
 
 
