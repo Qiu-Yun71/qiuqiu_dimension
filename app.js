@@ -23,7 +23,7 @@ const loading = document.createElement('div')
 loading.className = 'loading'  //设置类名便于添加css样式
 loading.textContent = '加载中......'
 
-let currentList = []//用于排序时存储下原顺序的动漫列表
+let currentList = []//用于存储当前页面展示的卡片列表
 
 
 async function fetchAnime() {
@@ -73,13 +73,18 @@ function getFontSize(title) {
 }
 
 function renderCards(animeList) {
+    const loves = getLove()
+    const lovesId = loves.map(items => items.id)
     const html = animeList.map(anime => {
         const picture = anime.images.large
         const title = anime.name_cn || anime.name
         const fontSize = getFontSize(title);
 
+        const islove = lovesId.includes(anime.id)
+
         //用自定义的data-id相较于id没有唯一性限制，用dataset读取
         return `<div class="card" data-id="${anime.id}">
+            <div  class="love-btn ${islove ? "active" : ""} ">❤</div>
             <img src="${picture}" alt="${title}">
             <div class="card-content">
                 <h3 style="font-size: ${fontSize};">${title}</h3>
@@ -177,6 +182,21 @@ function closeModal() {
 }
 
 cardContainer.addEventListener('click', (e) => {
+    //先判断是否点击到收藏键
+    const loveBtn = e.target.closest('.love-btn')
+    if (loveBtn) {
+        e.stopPropagation()//阻止冒泡到卡片详情
+        const card = e.target.closest('.card')
+        const animeId = parseInt(card.dataset.id)
+        const animeData = currentList.find(item => item.id === animeId)
+        if (animeId) {
+            const added = toggleLove(animeId, animeData)
+            // 使用强制转换代码健壮性更好
+            loveBtn.classList.toggle('active', added)
+        }
+        return//不加会接着执行下面的详情页函数
+    }
+
     const card = e.target.closest('.card')
     if (!card) return
 
@@ -209,6 +229,47 @@ sortSelect.addEventListener('change', (e) => {
         return;
     }
 })
+
+//五、收藏功能
+//本地存储只能存储字符串形式
+function getLove() {
+    const stored = localStorage.getItem('loves')
+    return stored ? JSON.parse(stored) : []
+}
+
+function saveLove(love) {
+    localStorage.setItem('loves', JSON.stringify(love))
+}
+
+function showLoves() {
+    const loves = getLove()
+    const title = document.getElementById('title-text')
+    title.innerHTML = '收藏列表'
+    if (loves.length === 0) {
+        cardContainer.innerHTML = '<b>暂无收藏喵，去添加一些叭~</b>'
+        currentList = []
+        return
+    }
+    currentList = loves
+    renderCards(loves)
+
+}
+
+function toggleLove(animeId, animeData) {
+    let loves = getLove()
+    //判断其中一个属性值是否相等用some，find，不能用include，这个是全部的相等，更多判断某个对象是否存在
+    const exict = loves.some(item => item.id === animeId)
+    if (exict) {
+        loves = loves.filter(item => item.id !== animeId)
+    } else {
+        loves.push(animeData)
+    }
+    saveLove(loves)
+    return !exict
+}
+
+const loveBtn = document.getElementById('love')
+loveBtn.addEventListener('click', showLoves)
 
 
 
