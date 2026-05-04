@@ -271,6 +271,77 @@ function toggleLove(animeId, animeData) {
 const loveBtn = document.getElementById('love')
 loveBtn.addEventListener('click', showLoves)
 
+//轮播图
+const allSides = document.querySelector('.all-slides')
+const slides = document.querySelectorAll('.slide')
+const dots = document.querySelectorAll('.dot')
+const prev = document.querySelector('.prev')
+const next = document.querySelector('.next')
 
+
+let currentIndex = 0
+let timer = null
+
+//更新轮播图位置和圆点样式
+function updateSlides() {
+    allSides.style.transform = `translateX(${-100 * currentIndex}%)`
+    dots.forEach((dot, idx) => {
+        dot.classList.toggle('active', idx === currentIndex)
+    })
+    slides.forEach((slide, idx) => {
+        slide.classList.toggle('active', idx === currentIndex)
+    })
+}
+
+function nextSlide() {
+    currentIndex = (currentIndex + 1) % slides.length
+    updateSlides()
+}
+function prevSlide() {
+    currentIndex = (currentIndex - 1 + slides.length) % slides.length
+    updateSlides()
+}
+
+//自动播放
+function autoPlay() {
+    if (timer) clearInterval(timer)//在存在定时器时，要清楚之前的重新创建一个，避免存在多个定时器
+    timer = setInterval(nextSlide, 3000)
+}
+function stopAutoPlay() {
+    if (timer) {
+        clearInterval(timer)
+        timer = null//关闭定时器后一定要手动清空id，前面的函数直接建立新定时器就不用
+    }
+}
+
+prev.addEventListener('click', () => {
+    stopAutoPlay()
+    prevSlide()
+    autoPlay()
+})
+
+next.addEventListener('click', () => {
+    stopAutoPlay()
+    nextSlide()
+    autoPlay()
+})
+
+dots.forEach((dot, idx) => {
+    dot.addEventListener('click', () => {
+        stopAutoPlay()
+        currentIndex = idx
+        updateSlides()
+        autoPlay()
+    })
+})
+
+//悬停时停止自动播放
+const carousel = document.querySelector('.carousel')
+carousel.addEventListener('mouseenter', stopAutoPlay)
+carousel.addEventListener('mouseleave', autoPlay)
+
+//初始化
+updateSlides()
+autoPlay()
 
 

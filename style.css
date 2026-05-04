@@ -8,6 +8,8 @@
     --bg-btn-active: rgb(219, 173, 246);
     --focus-color: rgb(136, 169, 224);
     --bg-modal: rgb(221, 198, 246);
+    --carousel-text: rgb(195, 219, 255);
+    --carousel-shadow: rgba(0, 0, 0, 0.8);
 }
 
 /* 黑夜模式*/
@@ -108,6 +110,7 @@ body.dark .logo a {
 .all-slides {
     display: flex;
     height: 100%;
+    transition: transform 0.8s cubic-bezier(0.77, 0, 0.175, 1);
 
 }
 
@@ -131,15 +134,25 @@ body.dark .logo a {
 
 .slide .caption {
     position: absolute;
-    background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
-    height: 80px;
+    background: linear-gradient(transparent, rgba(0, 0, 0, 0.85));
+    height: 100px;
     width: 100%;
     bottom: 0%;
-    line-height: 80px;
+    line-height: 100px;
     font-weight: 700;
-    font-size: 1.5rem;
-    color: aliceblue;
+    font-size: 1.8rem;
+    color: var(--carousel-text);
     text-align: center;
+    letter-spacing: 4px;
+    padding-bottom: 10px;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 1.3s ease-out, transform 1.3s ease-out;
+}
+
+.slide.active .caption {
+    opacity: 1;
+    transform: translateY(0);
 }
 
 .carousel-btn {
@@ -194,7 +207,7 @@ body.dark .logo a {
 
 
 /* :active 是 瞬时的,不能实现点击后一直高亮，所以js一般是用.active加上一个额外的类名实现效果 css是用的单选框绑定的圆点checked实现的*/
-.dot:active {
+.dot.active {
     background: var(--border-color);
     transform: scale(1.3);
 }
